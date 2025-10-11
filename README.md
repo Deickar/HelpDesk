@@ -1,67 +1,209 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+📋 Descripción del Proyecto
+Sistema de HelpDesk desarrollado en Laravel 10 diseñado para gestionar tickets de soporte técnico, permitiendo a los usuarios reportar incidencias y al personal de soporte dar seguimiento y resolverlas de manera eficiente.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+✨ Características Principales
+🎫 Gestión de Tickets: Creación, seguimiento y cierre de tickets de soporte
 
-## About Laravel
+👥 Sistema de Roles: Administradores, Agentes de Soporte y Usuarios
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+📊 Panel de Control: Dashboard con métricas y estadísticas
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+🔔 Notificaciones: Sistema de notificaciones por email y en la aplicación
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+📁 Gestión de Archivos: Adjuntar archivos a los tickets
 
-## Learning Laravel
+🏷️ Categorías y Etiquetas: Organización de tickets por categorías
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+💬 Sistema de Comentarios: Comunicación entre usuarios y agentes
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+📈 Reportes: Generación de reportes de actividad y rendimiento
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+🔐 Autenticación Segura: Sistema de login y registro seguro
 
-## Laravel Sponsors
+🚀 Requisitos del Sistema
+PHP: 8.1 o superior
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Composer: 2.0 o superior
 
-### Premium Partners
+Base de datos: MySQL 8.0, PostgreSQL, SQLite o SQL Server
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Servidor Web: Apache o Nginx
 
-## Contributing
+Node.js: 14 o superior (para assets)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+NPM: 6.0 o superior
 
-## Code of Conduct
+📦 Instalación
+Sigue estos pasos para instalar y configurar el proyecto:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. Clonar el repositorio
+bash
+git clone https://github.com/tu-usuario/helpdesk.git
+cd helpdesk
+2. Instalar dependencias de PHP
+bash
+composer install
+3. Configurar variables de entorno
+bash
+cp .env.example .env
+php artisan key:generate
+4. Configurar la base de datos
+Edita el archivo .env con tus credenciales de base de datos:
 
-## Security Vulnerabilities
+env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=helpdesk
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+5. Ejecutar migraciones y seeders
+bash
+php artisan migrate --seed
+6. Instalar dependencias de frontend
+bash
+npm install
+npm run build
+7. Configurar almacenamiento
+bash
+php artisan storage:link
+8. Configurar colas (opcional para procesamiento en segundo plano)
+bash
+# Configurar supervisor o ejecutar en desarrollo
+php artisan queue:work
+9. Iniciar el servidor
+bash
+php artisan serve
+👤 Usuarios por Defecto
+El seeder crea los siguientes usuarios de prueba:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Administrador:
 
-## License
+Email: admin@helpdesk.com
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# HelpDesk
+Contraseña: password
+
+Agente de Soporte:
+
+Email: agent@helpdesk.com
+
+Contraseña: password
+
+Usuario:
+
+Email: user@helpdesk.com
+
+Contraseña: password
+
+🛠️ Configuración Adicional
+Configuración de Email
+Edita el archivo .env para configurar el servicio de email:
+
+env
+MAIL_MAILER=smtp
+MAIL_HOST=tu-servidor-smtp
+MAIL_PORT=587
+MAIL_USERNAME=tu-email
+MAIL_PASSWORD=tu-contraseña
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="noreply@helpdesk.com"
+MAIL_FROM_NAME="HelpDesk System"
+Configuración de Colas
+Para procesamiento en segundo plano, configura tu driver de colas:
+
+env
+QUEUE_CONNECTION=database
+🧪 Ejecución de Tests
+bash
+# Ejecutar tests PHPUnit
+php artisan test
+
+# Ejecutar tests con cobertura
+php artisan test --coverage
+📁 Estructura del Proyecto
+text
+helpdesk/
+├── app/
+│   ├── Models/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   ├── Requests/
+│   │   └── Middleware/
+│   ├── Providers/
+│   ├── Policies/
+│   └── Notifications/
+├── database/
+│   ├── migrations/
+│   ├── seeders/
+│   └── factories/
+├── resources/
+│   ├── views/
+│   └── assets/
+├── config/
+├── public/
+├── routes/
+└── storage/
+🔧 Comandos Artisan Útiles
+bash
+# Limpiar cache de la aplicación
+php artisan optimize:clear
+
+# Crear un nuevo usuario administrador
+php artisan make:admin
+
+# Generar reportes
+php artisan reports:generate
+
+# Backup de la base de datos
+php artisan backup:run
+🎨 Personalización
+Cambiar el tema de colores
+Edita el archivo resources/css/app.css para personalizar los colores:
+
+css
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --accent-color: #e74c3c;
+}
+Configurar categorías de tickets
+Las categorías pueden ser gestionadas desde el panel de administración o editando el seeder en database/seeders/CategorySeeder.php.
+
+🤝 Contribución
+Fork el proyecto
+
+Crea una rama para tu feature (git checkout -b feature/AmazingFeature)
+
+Commit tus cambios (git commit -m 'Add some AmazingFeature')
+
+Push a la rama (git push origin feature/AmazingFeature)
+
+Abre un Pull Request
+
+📄 Licencia
+Este proyecto está bajo la Licencia MIT. Ver el archivo LICENSE para más detalles.
+
+🐛 Reportar Issues
+Si encuentras algún problema, por favor reportalo en la sección de Issues del repositorio.
+
+📞 Soporte
+Si necesitas ayuda con la instalación o configuración:
+
+Revisa la documentación en Wiki del Proyecto
+
+Abre un issue en GitHub
+
+Contacta al equipo de desarrollo
+
+🔄 Actualizaciones
+Para mantener tu instalación actualizada:
+
+bash
+# Actualizar dependencias de PHP
+composer update
+
+# Actualizar dependencias de JavaScript
+npm update
+
+# Ejecutar migraciones nuevas
+php artisan migrate
