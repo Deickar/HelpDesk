@@ -9,7 +9,9 @@ class Status extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'color'];
+    protected $fillable = ['name', 'color', 'updated_at', 'created_at'];
+
+    protected $table = 'status';
 
     public function tickets()
     {

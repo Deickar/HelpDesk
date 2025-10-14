@@ -11,6 +11,8 @@ class Priority extends Model
 
     protected $fillable = ['name', 'response_time'];
 
+    protected $table = 'priority';
+
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
