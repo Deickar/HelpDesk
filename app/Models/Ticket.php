@@ -26,7 +26,7 @@ class Ticket extends Model
 
     public function status()
     {
-    return $this->belongsTo(Status::class);
+        return $this->belongsTo(Status::class);
     }
 
     public function priority()
@@ -36,23 +36,21 @@ class Ticket extends Model
 
     public function category()
     {
-    return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function messages()
     {
-    return $this->hasMany(TicketMessage::class);
+        return $this->hasMany(TicketMessage::class);
     }
 
     public function attachments()
     {
-    return $this->hasMany(AttachmentTicket::class);
+        return $this->hasMany(AttachmentTicket::class);
     }
 
     public function logs()
     {
-    return $this->hasMany(Log::class);
+        return $this->hasMany(Log::class);
     }
-
-
 }

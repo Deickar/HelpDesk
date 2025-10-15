@@ -60,12 +60,12 @@ class User extends Authenticatable
         return $this->hasMany(Ticket::class, 'assigned_to');
     }
 
-        public function ticketMessages()
+    public function ticketMessages()
     {
         return $this->hasMany(TicketMessage::class);
     }
 
-        public function logs()
+    public function logs()
     {
         return $this->hasMany(Log::class);
     }

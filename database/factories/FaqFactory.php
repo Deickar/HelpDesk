@@ -19,7 +19,6 @@ class FaqFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph
-            //
         ];
     }
 }

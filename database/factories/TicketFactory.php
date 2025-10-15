@@ -25,8 +25,6 @@ class TicketFactory extends Factory
             'priority_id' => \App\Models\Priority::inRandomOrder()->first()->id ?? 1,
             'category_id' => \App\Models\Category::inRandomOrder()->first()->id ?? 1,
             'closed_at' => $this->faker->optional()->dateTimeBetween('-1 month', 'now'),
-
-            //
         ];
     }
 }

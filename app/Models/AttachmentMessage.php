@@ -15,5 +15,4 @@ class AttachmentMessage extends Model
     {
         return $this->belongsTo(TicketMessage::class, 'ticket_message_id');
     }
-
 }

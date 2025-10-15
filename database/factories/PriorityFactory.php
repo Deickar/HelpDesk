@@ -18,8 +18,7 @@ class PriorityFactory extends Factory
     {
         return [
             'name' => $this->faker->randomElement(['Alta', 'Media', 'Baja']),
-            'response_time' => $this->faker->numberBetween(30, 1440) //minutos
-            //
+            'response_time' => $this->faker->numberBetween(30, 1440) // minutos
         ];
     }
 }

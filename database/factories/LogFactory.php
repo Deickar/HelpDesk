@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Log>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Lo>
  */
 class LogFactory extends Factory
 {
@@ -21,7 +21,6 @@ class LogFactory extends Factory
             'user_id' => \App\Models\User::inRandomOrder()->first()->id ?? 1,
             'action' => $this->faker->sentence,
             'created_at' => now(),
-            //
         ];
     }
 }

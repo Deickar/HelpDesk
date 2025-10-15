@@ -19,7 +19,6 @@ class StatusFactory extends Factory
         return [
             'name' => $this->faker->randomElement(['Abierto', 'En progreso', 'Cerrado', 'Pendiente', 'Resuelto']),
             'color' => $this->faker->safeColorName
-            //
         ];
     }
 }

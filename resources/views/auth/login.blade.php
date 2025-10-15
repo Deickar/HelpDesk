@@ -1,47 +1,115 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!doctype html>
+<html lang="es" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
+<head>
+    <meta charset="utf-8" />
+    <title>Iniciar Sesión | HelpDesk AnderCode</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Sistema de Mesa de Ayuda - HelpDesk AnderCode" name="description" />
+    <meta content="AnderCode" name="author" />
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+    <script src="{{ asset('assets/js/layout.js') }}"></script>
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" />
+</head>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+<body>
+    <div class="auth-page-wrapper pt-5">
+        <div class="auth-one-bg-position auth-one-bg" id="auth-particles">
+            <div class="bg-overlay"></div>
+            <div class="shape">
+                <svg viewBox="0 0 1440 120">
+                    <path d="M 0,36 C 144,53.6 432,123.2 720,124 C 1008,124.8 1296,56.8 1440,40L1440 140L0 140z"></path>
+                </svg>
+            </div>
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <div class="auth-page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center mt-sm-5 mb-4 text-white-50">
+                        <a href="{{ url('/') }}" class="d-inline-block auth-logo">
+                            <img src="{{ asset('assets/images/logo-light.png') }}" alt="logo" height="30">
+                        </a>
+                        <p class="mt-3 fs-15 fw-medium">Bienvenido al sistema HelpDesk de AnderCode</p>
+                    </div>
+                </div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5">
+                        <div class="card mt-4">
+                            <div class="card-body p-4">
+                                <div class="text-center mt-2">
+                                    <h5 class="text-primary">¡Bienvenido de nuevo!</h5>
+                                    <p class="text-muted">Inicia sesión en tu cuenta de HelpDesk</p>
+                                </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                <div class="p-2 mt-4">
+                                    <form method="POST" action="{{ route('login') }}">
+                                        @csrf
+
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Correo electrónico</label>
+                                            <input type="email" name="email" class="form-control" id="email" placeholder="Ingresa tu correo" required autofocus>
+                                            @error('email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <div class="float-end">
+                                                <a href="{{ route('password.request') }}" class="text-muted">¿Olvidaste tu contraseña?</a>
+                                            </div>
+                                            <label for="password" class="form-label">Contraseña</label>
+                                            <div class="position-relative auth-pass-inputgroup mb-3">
+                                                <input type="password" name="password" class="form-control pe-5" id="password" placeholder="••••••••" required>
+                                                <button class="btn btn-link position-absolute end-0 top-0 text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                                            </div>
+                                            @error('password')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                                            <label class="form-check-label" for="remember">Recuérdame</label>
+                                        </div>
+
+                                        <div class="mt-4">
+                                            <button class="btn btn-success w-100" type="submit">Iniciar Sesión</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 text-center">
+                            <p class="mb-0">¿No tienes una cuenta? <a href="{{ route('register') }}" class="fw-semibold text-primary text-decoration-underline"> Regístrate </a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+        <footer class="footer text-center">
+            <div class="container">
+                <p class="mb-0 text-muted">
+                    &copy; <script>document.write(new Date().getFullYear())</script> HelpDesk AnderCode. Desarrollado con ❤️ por AnderCode.
+                </p>
+            </div>
+        </footer>
+    </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins.js') }}"></script>
+    <script src="{{ asset('assets/libs/particles.js/particles.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/particles.app.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/password-addon.init.js') }}"></script>
+</body>
+</html>

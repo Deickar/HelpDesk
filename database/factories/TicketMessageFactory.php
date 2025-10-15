@@ -20,7 +20,6 @@ class TicketMessageFactory extends Factory
             'ticket_id' => \App\Models\Ticket::inRandomOrder()->first()->id ?? 1,
             'user_id' => \App\Models\User::inRandomOrder()->first()->id ?? 1,
             'message' => $this->faker->paragraph,
-            //
         ];
     }
 }

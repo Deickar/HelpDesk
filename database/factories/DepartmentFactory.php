@@ -18,7 +18,6 @@ class DepartmentFactory extends Factory
     {
         return [
             'name' => $this->faker->company
-            //
         ];
     }
 }
