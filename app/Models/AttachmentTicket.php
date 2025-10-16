@@ -11,6 +11,8 @@ class AttachmentTicket extends Model
 
     protected $fillable = ['ticket_id', 'file_path', 'file_type'];
 
+    protected $table = 'attachments_ticket';
+
     public function ticket()
     {
         return $this->belongsTo(Ticket::class);

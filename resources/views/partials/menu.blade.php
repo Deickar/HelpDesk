@@ -26,48 +26,91 @@
 
     <div id="scrollbar">
         <div class="container-fluid">
-
-            <div id="two-column-menu">
-            </div>
+            <div id="two-column-menu"></div>
             <ul class="navbar-nav" id="navbar-nav">
 
                 <li class="menu-title"><span>Dashboard</span></li>
-
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="{{ route('dashboard') }}">
                         <i class="ri-window-line"></i> <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li class="menu-title"><span>Mantenimiento</span></li>
+                {{-- Solo para CLIENT --}}
+                @if(auth()->user()->role === 'client')
+                    <li class="menu-title"><span>Tickets</span></li>
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#">
-                        <i class="ri-money-dollar-circle-line"></i> <span>Categoria</span>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('tickets.create') }}">
+                            <i class="ri-money-dollar-circle-line"></i> <span>Nuevo Ticket</span>
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#">
-                        <i class="ri-money-dollar-circle-line"></i> <span>Usuario</span>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('tickets.index') }}">
+                            <i class="ri-money-dollar-circle-line"></i> <span>Mis Tickets</span>
+                        </a>
+                    </li>
+                @endif
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#">
-                        <i class="ri-money-dollar-circle-line"></i> <span>Departamentos</span>
-                    </a>
-                </li>
+                {{-- Solo para AGENT --}}
+                @if(auth()->user()->role === 'agent')
+                    <li class="menu-title"><span>Asignados</span></li>
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#">
-                        <i class="ri-money-dollar-circle-line"></i> <span>Faq</span>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('tickets.asignados') }}">
+                            <i class="ri-money-dollar-circle-line"></i> <span>Mis Tickets Asignados</span>
+                        </a>
+                    </li>
+                @endif
+
+                {{-- Solo para ADMIN --}}
+                @if(auth()->user()->role === 'admin')
+                    <li class="menu-title"><span>Mantenimiento</span></li>
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('categories.index') }}">
+                            <i class="ri-money-dollar-circle-line"></i> <span>Categoria</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('users.index') }}">
+                            <i class="ri-money-dollar-circle-line"></i> <span>Usuario</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('departments.index') }}">
+                            <i class="ri-money-dollar-circle-line"></i> <span>Departamentos</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('faqs.index') }}">
+                            <i class="ri-money-dollar-circle-line"></i> <span>Faq</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-title"><span>Gestión</span></li>
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('tickets.gestion') }}">
+                            <i class="ri-money-dollar-circle-line"></i> <span>Gestionar Tickets</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('tickets.conformidad') }}">
+                            <i class="ri-money-dollar-circle-line"></i> <span>Conformidad Tickets</span>
+                        </a>
+                    </li>
+                @endif
 
             </ul>
         </div>
     </div>
+
 
     <div class="sidebar-background"></div>
 </div>

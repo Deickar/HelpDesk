@@ -1,0 +1,26 @@
+{{-- 💬 Comentarios (Mensajes del ticket) --}}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Historial de Mensajes</h5>
+        @forelse($ticket->messages as $message)
+        <div class="mb-3 border p-2 rounded">
+            <p><strong>{{ $message->user->name }}</strong> <span class="text-muted">{{
+                    $message->created_at->format('d/m/Y H:i') }}</span></p>
+            <div>{!! $message->message !!}</div>
+
+            {{-- 📎 Archivos adjuntos del mensaje --}}
+            @if($message->attachments->count() > 0)
+            <p><strong>Adjuntos:</strong></p>
+            <ul>
+                @foreach($message->attachments as $attach)
+                <li><a href="{{ asset('storage/' . $attach->file_path) }}" target="_blank">{{
+                        basename($attach->file_path) }}</a></li>
+                @endforeach
+            </ul>
+            @endif
+        </div>
+        @empty
+        <p>No hay mensajes aún.</p>
+        @endforelse
+    </div>
+</div>

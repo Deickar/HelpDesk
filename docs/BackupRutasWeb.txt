@@ -1,0 +1,59 @@
+<?php
+
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TicketController;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// 📌 Acceso común a todos los roles autenticados
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('categories', CategoryController::class);
+    Route::resource('departments', DepartmentController::class);
+    Route::resource('faqs', FaqController::class);
+    Route::resource('users', UserController::class);
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
+    Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
+    Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
+    Route::get('/tickets/gestion', [TicketController::class, 'gestion'])->name('tickets.gestion');
+    Route::get('/tickets/gestion/{id}', [TicketController::class, 'gestiondatos'])->name('tickets.gestiondatos');
+    Route::post('/tickets/actualizar/{id}', [TicketController::class, 'actualizarGestion'])->name('tickets.actualizarGestion');
+    // Ver el detalle del ticket (incluye mensajes y adjuntos)
+    Route::get('/tickets/{id}/detalle', [TicketController::class, 'show'])->name('tickets.detalle');
+    // Guardar una respuesta al ticket (usado desde AJAX/Dropzone)
+    Route::post('/tickets/responder', [TicketController::class, 'responder'])->name('tickets.responder');
+    Route::get('/tickets/asignados', [TicketController::class, 'asignados'])->name('tickets.asignados');
+    // Cerrar Ticket
+    Route::post('/tickets/{ticket}/cerrar', [TicketController::class, 'cerrar'])->name('tickets.cerrar');
+    // Cerrar Reabrir
+    Route::post('/tickets/{ticket}/reabrir', [TicketController::class, 'reabrir'])->name('tickets.reabrir');
+    // Cancelar Ticket
+    Route::post('/tickets/{id}/cancelar', [TicketController::class, 'cancelarticket'])->name('tickets.cancelar');
+
+    Route::get('/tickets/conformidad', [TicketController::class, 'conformidad'])->name('tickets.conformidad');
+    Route::post('/tickets/{id}/marcar-resuelto', [TicketController::class, 'marcarResuelto'])->name('tickets.marcarResuelto');
+
+    Route::get('/tickets/{id}/pdf', [TicketController::class, 'generarPDF'])->name('tickets.pdf');
+});
+
+require __DIR__.'/auth.php';

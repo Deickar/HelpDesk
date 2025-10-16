@@ -5,7 +5,6 @@
 <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
 <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
 <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
-<script src="{{ asset('assets/js/plugins.js') }}"></script>
 
 <script src="{{ asset('assets/js/app.js') }}"></script>
 
@@ -22,5 +21,11 @@
 <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- dropzone min -->
+<script src="{{ asset('assets/libs/dropzone/dropzone-min.js') }}"></script>
+
+<!-- quill js -->
+<script src="{{ asset('assets/libs/quill/quill.min.js') }}"></script>
 
 

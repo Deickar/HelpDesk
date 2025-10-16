@@ -22,4 +22,16 @@ class Log extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // Método estático para registrar logs
+    public static function register($ticket_id, $action)
+    {
+        self::create([
+            'ticket_id'   => $ticket_id,
+            'user_id'     => auth()->id(),
+            'action'      => $action,
+            'created_at'  => now(),
+        ]);
+    }
+
 }

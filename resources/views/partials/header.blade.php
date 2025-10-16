@@ -83,39 +83,7 @@
                             </div>
 
                             <div class="notification-list">
-                                <!-- item -->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
-                                    <div class="d-flex">
-                                        <img src="assets/images/users/avatar-2.jpg"
-                                            class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="flex-1">
-                                            <h6 class="m-0">Angela Bernier</h6>
-                                            <span class="fs-11 mb-0 text-muted">Manager</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <!-- item -->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
-                                    <div class="d-flex">
-                                        <img src="assets/images/users/avatar-3.jpg"
-                                            class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="flex-1">
-                                            <h6 class="m-0">David Grasso</h6>
-                                            <span class="fs-11 mb-0 text-muted">Web Designer</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <!-- item -->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
-                                    <div class="d-flex">
-                                        <img src="assets/images/users/avatar-5.jpg"
-                                            class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="flex-1">
-                                            <h6 class="m-0">Mike Bunch</h6>
-                                            <span class="fs-11 mb-0 text-muted">React Developer</span>
-                                        </div>
-                                    </div>
-                                </a>
+
                             </div>
                         </div>
 
@@ -169,12 +137,12 @@
                         aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
                             <img class="rounded-circle header-profile-user"
-                                src="assets/images/users/user-dummy-img.jpg"
+                                src="{{ asset('assets/images/users/user-dummy-img.jpg') }}"
                                 alt="Avatar de {{ Auth::user()->name }}">
                             <span class="text-start ms-xl-2">
                                 <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ Auth::user()->name }}</span>
                                 <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">
-                                    {{ Auth::user()->role->name ?? 'Usuario' }}
+                                    {{ Auth::user()->role ?? 'Usuario' }}
                                 </span>
                             </span>
                         </span>

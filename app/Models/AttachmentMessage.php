@@ -11,6 +11,8 @@ class AttachmentMessage extends Model
 
     protected $fillable = ['ticket_message_id', 'file_path', 'file_type'];
 
+    protected $table = 'attachments_messages';
+
     public function message()
     {
         return $this->belongsTo(TicketMessage::class, 'ticket_message_id');
