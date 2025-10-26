@@ -12,6 +12,6 @@ Hola {{ $ticket->agent->name }}, tienes un nuevo ticket asignado en el sistema.
 Gestionar Ticket
 @endcomponent
 
-Gracias,  
+Gracias,
 {{ config('app.name') }}
 @endcomponent

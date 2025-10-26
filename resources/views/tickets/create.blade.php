@@ -21,10 +21,10 @@
         </div>
 
         @if(session('error'))
-            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-            </div>
+        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
         @endif
 
         <div class="row">
@@ -41,7 +41,7 @@
                                 <label for="subject" class="form-label">Asunto <span class="text-danger">*</span></label>
                                 <input type="text" name="subject" id="subject" class="form-control" required>
                                 @error('subject')
-                                    <span class="text-danger small">{{ $message }}</span>
+                                <span class="text-danger small">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -50,11 +50,11 @@
                                 <select name="category_id" id="category_id" class="form-select" required>
                                     <option value="">Seleccione una categoría</option>
                                     @foreach($categories as $cat)
-                                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('category_id')
-                                    <span class="text-danger small">{{ $message }}</span>
+                                <span class="text-danger small">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -63,7 +63,7 @@
                                 <div class="snow-editor" style="height: 200px;">{!! old('description') !!}</div>
                                 <input type="hidden" name="description" id="description">
                                 @error('description')
-                                    <span class="text-danger small">{{ $message }}</span>
+                                <span class="text-danger small">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -125,33 +125,56 @@
 
 @push('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        let arrDocument=[];
+    document.addEventListener('DOMContentLoaded', function() {
+        let arrDocument = [];
         Dropzone.autoDiscover = false;
 
+        // Inicialización del editor de texto enriquecido Quill
         var snowEditors = document.querySelectorAll(".snow-editor");
         if (snowEditors) {
-            Array.from(snowEditors).forEach(function (el) {
+            Array.from(snowEditors).forEach(function(el) {
                 let options = {
                     theme: "snow",
                     modules: {
                         toolbar: [
-                            [{ font: [] }, { size: [] }],
+                            [{
+                                font: []
+                            }, {
+                                size: []
+                            }],
                             ["bold", "italic", "underline", "strike"],
-                            [{ color: [] }, { background: [] }],
-                            [{ script: "super" }, { script: "sub" }],
-                            [
-                                { header: [false, 1, 2, 3, 4, 5, 6] },
+                            [{
+                                color: []
+                            }, {
+                                background: []
+                            }],
+                            [{
+                                script: "super"
+                            }, {
+                                script: "sub"
+                            }],
+                            [{
+                                    header: [false, 1, 2, 3, 4, 5, 6]
+                                },
                                 "blockquote",
                                 "code-block",
                             ],
-                            [
-                                { list: "ordered" },
-                                { list: "bullet" },
-                                { indent: "-1" },
-                                { indent: "+1" },
+                            [{
+                                    list: "ordered"
+                                },
+                                {
+                                    list: "bullet"
+                                },
+                                {
+                                    indent: "-1"
+                                },
+                                {
+                                    indent: "+1"
+                                },
                             ],
-                            ["direction", { align: [] }],
+                            ["direction", {
+                                align: []
+                            }],
                             ["link", "image", "video"],
                             ["clean"],
                         ]
@@ -159,14 +182,14 @@
                 };
                 let quill = new Quill(el, options);
 
-                // 📝 Copiar contenido al input hidden antes de enviar el formulario
-                document.getElementById('ticket-form').addEventListener('submit', function () {
+                // Copia el contenido HTML de Quill al input hidden 'description' antes de enviar el formulario.
+                document.getElementById('ticket-form').addEventListener('submit', function() {
                     document.getElementById('description').value = el.querySelector('.ql-editor').innerHTML;
                 });
             });
         }
 
-        // Usar Dropzone del template
+        // Configuración de Dropzone para la carga de archivos
         let previewTemplate,
             dropzone,
             dropzonePreviewNode = document.querySelector("#dropzone-preview-list");
@@ -177,7 +200,7 @@
             dropzonePreviewNode.parentNode.removeChild(dropzonePreviewNode);
 
             const dropzone = new Dropzone(".dropzone", {
-                url: "#", // Dropzone no sube, solo muestra
+                url: "#", // La URL es simbólica, la subida se maneja con Fetch API.
                 autoProcessQueue: false,
                 uploadMultiple: true,
                 previewsContainer: "#dropzone-preview",
@@ -187,7 +210,8 @@
                 acceptedFiles: ".jpg,.jpeg,.png,.pdf,.doc,.docx"
             });
 
-            dropzone.on("addedfile", function (file) {
+            // Evento 'addedfile': se dispara cuando se añade un archivo.
+            dropzone.on("addedfile", function(file) {
                 if (file.size > 2 * 1024 * 1024) {
                     alert("Archivo excede el tamaño máximo de 2 MB.");
                     dropzone.removeFile(file);
@@ -196,7 +220,8 @@
                 }
             });
 
-            dropzone.on('maxfilesexceeded',function(file){
+            // Evento 'maxfilesexceeded': se dispara si se supera el límite de archivos.
+            dropzone.on('maxfilesexceeded', function(file) {
                 Swal.fire({
                     title: "Mesa de Ayuda",
                     text: "Solo se permiten un máximo de 5 archivos.",
@@ -206,14 +231,15 @@
                 dropzone.removeFile(file);
             });
 
-            dropzone.on("removedfile", function (file) {
+            // Evento 'removedfile': se dispara cuando se elimina un archivo de la vista previa.
+            dropzone.on("removedfile", function(file) {
                 const i = arrDocument.indexOf(file);
                 if (i > -1) arrDocument.splice(i, 1);
             });
         }
 
-        // Captura del submit
-        document.getElementById("ticket-form").addEventListener("submit", function (e) {
+        // Captura del evento 'submit' del formulario para manejarlo con Fetch API.
+        document.getElementById("ticket-form").addEventListener("submit", function(e) {
             e.preventDefault();
 
             const form = document.getElementById("ticket-form");
@@ -224,6 +250,7 @@
                 formData.append("files[]", file);
             });
 
+            // Muestra una alerta de carga (loader) con SweetAlert2.
             Swal.fire({
                 title: 'Enviando ticket...',
                 html: '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div><br><br>Por favor espera mientras se guarda el ticket y se envía el correo.',
@@ -234,45 +261,37 @@
                 }
             });
 
-            // Solo mostramos por ahora
-            console.log("🧾 Archivos a enviar:");
-            arrDocument.forEach(file => console.log(file.name));
-
-            // Imprime los campos de texto
-            for (let [key, value] of formData.entries()) {
-                console.log(`${key}: ${value}`);
-            }
-
+            // Envía los datos del formulario usando Fetch API.
             fetch(form.action, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                },
-                body: formData
-            })
-            .then(response => {
-               console.log(response);
-            })
-            .then(data => {
-                Swal.close(); // Cierra el loader
-                console.log("✅ Ticket guardado correctamente:", data);
-                Swal.fire({
-                    title: "Éxito",
-                    text: "El ticket ha sido guardado correctamente",
-                    icon: "success",
-                    timer: 3000,
-                    timerProgressBar: true,
-                    showConfirmButton: true,
-                    didClose: () => {
-                        location.reload(); // se recarga al cerrar automáticamente
-                    }
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Si la respuesta es exitosa, muestra un mensaje de éxito y recarga la página.
+                    // En caso de error, muestra un mensaje de error.
+                    Swal.close(); // Cierra el loader
+                    console.log("✅ Ticket guardado correctamente:", data);
+                    Swal.fire({
+                        title: "Éxito",
+                        text: "El ticket ha sido guardado correctamente",
+                        icon: "success",
+                        timer: 3000,
+                        timerProgressBar: true,
+                        showConfirmButton: true,
+                        willClose: () => {
+                            location.reload(); // se recarga al cerrar automáticamente
+                        }
+                    });
+                })
+                .catch(error => {
+                    Swal.close(); // Cierra el loader
+                    console.error("❌ Error:", error);
+                    Swal.fire("Error", "Ocurrió un error al guardar el ticket", "error");
                 });
-            })
-            .catch(error => {
-                Swal.close(); // Cierra el loader
-                console.error("❌ Error:", error);
-                Swal.fire("Error", "Ocurrió un error al guardar el ticket", "error");
-            });
         });
     });
 </script>

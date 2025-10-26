@@ -9,9 +9,9 @@
             <label for="month">Mes</label>
             <select name="month" id="month" class="form-select">
                 @foreach(range(1, 12) as $m)
-                    <option value="{{ $m }}" {{ request('month', now()->month) == $m ? 'selected' : '' }}>
-                        {{ \Carbon\Carbon::create()->month($m)->locale('es')->monthName }}
-                    </option>
+                <option value="{{ $m }}" {{ request('month', now()->month) == $m ? 'selected' : '' }}>
+                    {{ \Carbon\Carbon::create()->month($m)->locale('es')->monthName }}
+                </option>
                 @endforeach
             </select>
         </div>
@@ -19,9 +19,9 @@
             <label for="year">Año</label>
             <select name="year" id="year" class="form-select">
                 @for($y = now()->year; $y >= now()->year - 5; $y--)
-                    <option value="{{ $y }}" {{ request('year', now()->year) == $y ? 'selected' : '' }}>
-                        {{ $y }}
-                    </option>
+                <option value="{{ $y }}" {{ request('year', now()->year) == $y ? 'selected' : '' }}>
+                    {{ $y }}
+                </option>
                 @endfor
             </select>
         </div>
@@ -97,8 +97,8 @@
 @push('dashboard-scripts')
 <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Gráfico por Categoría
+    document.addEventListener('DOMContentLoaded', function() {
+        // Gráfico de Barras: Tickets por Categoría
         new ApexCharts(document.querySelector("#grafico_tickets_categoria"), {
             chart: {
                 type: 'bar',
@@ -106,16 +106,18 @@
             },
             series: [{
                 name: 'Tickets',
-                data: @json($categoriasData->pluck('total'))
+                data: @json(($categoriasData->pluck('total')))
             }],
             xaxis: {
                 categories: @json($categoriasData->pluck('nombre')),
-                labels: { rotate: -45 }
+                labels: {
+                    rotate: -45
+                }
             },
             colors: ['#556ee6']
         }).render();
 
-        // Gráfico por Prioridad
+        // Gráfico de Barras: Tickets por Prioridad
         new ApexCharts(document.querySelector("#grafico_tickets_prioridad"), {
             chart: {
                 type: 'bar',
@@ -127,12 +129,11 @@
             }],
             xaxis: {
                 categories: @json($prioridadesData->pluck('nombre')),
-                labels: { rotate: -45 }
+                labels: {
+                    rotate: -45
+                }
             },
             colors: ['#34c38f']
         }).render();
     });
 </script>
-@endpush
-
-
