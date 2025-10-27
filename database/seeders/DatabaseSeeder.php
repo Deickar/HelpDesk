@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        // Llama al seeder de usuarios de demostración PRIMERO
+        $this->call(UserDemoSeeder::class);
+
         Category::factory(10)->create();
         Department::factory(10)->create();
         Faq::factory(30)->create();
@@ -29,8 +32,5 @@ class DatabaseSeeder extends Seeder
         Ticket::factory(1000)->create();
         TicketMessage::factory(3000)->create();
         Log::factory(500)->create();
-
-        // Llama al seeder de usuarios de demostración
-        $this->call(UserDemoSeeder::class);
     }
 }

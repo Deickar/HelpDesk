@@ -41,13 +41,15 @@ class UserDemoSeeder extends Seeder
         ];
         // Crea usuarios de demostración recorro el array $demo mando insertar los datos a la DB
         foreach ($demo as $user) {
-            User::create([
-                'name' => $user['name'],
-                'email' => $user['email'],
-                'password' => Hash::make($user['password']),
-                'role' => $user['role'],
-                'department_id' => 1, // Asignamos un departamento por defecto
-            ]);
+            User::updateOrCreate(
+                ['email' => $user['email']], // Buscar por email
+                [
+                    'name' => $user['name'],
+                    'password' => Hash::make($user['password']),
+                    'role' => $user['role'],
+                    'department_id' => 1, // Asignamos un departamento por defecto
+                ]
+            );
         }
     }
 }
